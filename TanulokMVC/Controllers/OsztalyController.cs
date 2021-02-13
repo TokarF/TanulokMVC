@@ -15,13 +15,7 @@ namespace TanulokMVC.Controllers
         TanuloDAO tanuloDAO = new TanuloDAO();
 
         //
-        public IActionResult Index()
-        {
-            return View(osztalyDAO.OsszesOsztaly());
-        }
-
-        // Osztályok tanulókkal lista nézet
-        public IActionResult OsztalyokTanulokkalLista(string kereses = "")
+        public IActionResult Index(string kereses = "")
         {
             List<OsztalyModel> osztalyok = osztalyDAO.OsszesOsztaly();
             if (kereses != null)
@@ -31,13 +25,17 @@ namespace TanulokMVC.Controllers
             else
             {
                 osztalyok.ForEach(osztaly => osztaly.diakok = tanuloDAO.OsztalyTanulok(osztaly.OsztalyId));
-
             }
 
             return View(osztalyok);
         }
 
+        // Osztályok tanulókkal lista nézet
+        public IActionResult Osztalyok()
+        {
+            return View(osztalyDAO.OsszesOsztaly());
 
+        }
 
         public IActionResult OsztalyAdatok(int id)
         {
@@ -57,12 +55,12 @@ namespace TanulokMVC.Controllers
             {
                 osztalyDAO.UjOsztaly(ujOsztaly);
                 TempData["Uzenet"] = "hozzaadas_siker";
-                return View("Index", osztalyDAO.OsszesOsztaly());
+                return View("Osztalyok", osztalyDAO.OsszesOsztaly());
             }
             catch
             {
                 TempData["Uzenet"] = "hozzaadas_hiba";
-                return View("Index", osztalyDAO.OsszesOsztaly());
+                return View("Osztalyok", osztalyDAO.OsszesOsztaly());
             }
         }
 
@@ -81,13 +79,13 @@ namespace TanulokMVC.Controllers
             {
                 osztalyDAO.OsztalyModositas(modositandoOsztaly);
                 TempData["Uzenet"] = "modositas_siker";
-                return View("Index", osztalyDAO.OsszesOsztaly());
+                return View("Osztalyok", osztalyDAO.OsszesOsztaly());
             }
             catch (Exception)
             {
 
                 TempData["Uzenet"] = "modositas_hiba";
-                return View("Index", osztalyDAO.OsszesOsztaly());
+                return View("Osztalyok", osztalyDAO.OsszesOsztaly());
             }
         }
 

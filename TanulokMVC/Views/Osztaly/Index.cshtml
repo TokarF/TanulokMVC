@@ -1,121 +1,72 @@
 ﻿@model IEnumerable<TanulokMVC.Models.OsztalyModel>
 
 @{
-    ViewData["Title"] = "Osztályok";
-    var osztaly = TempData["Uzenet"];
+    ViewData["Title"] = "Főoldal";
 }
-
-
 
 <div class="w3-container" style="margin-top:50px; margin-bottom:50px;">
-    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Osztályok</b></h1>
+    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Főoldal</b></h1>
 </div>
-
-@{if (osztaly != null)
-    {
-    <div class="w3-panel w3-light-gray w3-card-4 w3-display-container w3-margin-right w3-margin-left">
-        <span onclick="this.parentElement.style.display='none'"
-              class="w3-button w3-display-topright">X</span>
-        @switch (osztaly.ToString().ToLower())
-        {
-            case "hozzaadas_siker":
-                <p class="w3-text-green">Osztály sikeresen hozzáadva!</p>
-                break;
-            case "hozzaadas_hiba":
-                <p class="w3-text-red">Hiba történt az osztály hozzáadásakor!</p>
-                break;
-            case "modositas_siker":
-                <p class="w3-text-green">Osztály sikeresen módosítva!</p>
-                break;
-            case "modositas_hiba":
-                <p class="w3-text-red">Hiba történt az osztály módosításakor!</p>
-                break;
-        }
-    </div>
-    }
-}
-
 
 <div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
-    <a asp-action="UjOsztalyForm" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-plus w3-margin-right"></i>Új osztály</a>
+    <form class="w3-container" asp-controller="Osztaly" asp-action="Index">
+        <input type="text" name="kereses" placeholder="Keresés név alapján" class="w3-input w3-col l8 w3-margin-right" />
+        <button type="submit" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round w3-col l3 w3-right"><i class="fas fa-search w3-margin-right"></i>Keresés</button>
+    </form>
 </div>
+@foreach (OsztalyModel osztaly in Model)
+{
+    if (osztaly.diakok.Count() > 0)
+    {
+        <div class="w3-card-4 w3-margin-right w3-margin-left w3-round" id="osztaly-@osztaly.OsztalyId" style="margin-bottom: 50px">
+            <table class="w3-table w3-bordered w3-striped w3-centered">
+                <thead>
+                    <tr class="w3-green w3-border-0">
+                        <th style="width: 20%;"><h5>@Html.DisplayNameFor(model => model.OsztalyNev): @osztaly.OsztalyNev</h5></th>
+                        <th class=""><h5>@Html.DisplayNameFor(model => model.OsztalyFonok): @osztaly.OsztalyFonok</h5></th>
+                        <th style="width: 20%;"><h5>@Html.DisplayNameFor(model => model.Tanterem): @osztaly.Tanterem</h5></th>
+                    </tr>
+                    <tr class="w3-green">
+                        <th>Tanuló ID</th>
+                        <th>Név</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* Összes diák kiiratása osztályon belül *@
+                    @foreach (TanuloModel diak in osztaly.diakok)
+                    {
+                        <tr>
+                            <td>@diak.TanuloId</td>
+                            <td>@diak.VezetekNev @diak.KeresztNev</td>
+                            <td>
+                                <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-user"></i></a>
+                                <a asp-controller="Tanulo" asp-action="TanuloModositasForm" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-user-edit"></i></a>
+                                <a id="btn-tanulo-torles" data-value-tanuloId="@diak.TanuloId" data-value-osztalyId="@osztaly.OsztalyId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
+    }
 
-<div class="w3-card-4 w3-margin-right w3-margin-left " id="osztaly" style="margin-bottom: 50px">
-    <table class="w3-table w3-bordered w3-striped w3-centered">
-        <thead>
-            <tr class="w3-green">
-                <th style="width: 10%;">@Html.DisplayNameFor(model => model.OsztalyId)</th>
-                <th style="width: 10%;">@Html.DisplayNameFor(model => model.OsztalyNev)</th>
-                <th class="">@Html.DisplayNameFor(model => model.OsztalyFonok)</th>
-                <th class="">@Html.DisplayNameFor(model => model.Tanterem)</th>
-                <th style="width: 20%;"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OsztalyId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OsztalyNev)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OsztalyFonok)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tanterem)
-                    </td>
-                    <td>
-                        <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@item.OsztalyId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-eye"></i></a>
-                        <a asp-controller="Osztaly" asp-action="OsztalyModositasForm" asp-route-id="@item.OsztalyId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-edit"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+}
+
+@* TODO: ki kellene rakni partialViewba, mert több oldal is használja *@
+@* Tanuló törlés Modal *@
+<div id="tanulo-torles-modal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-red w3-center">
+            <h2>Tanuló Törlés</h2>
+        </header>
+        <div class="w3-container w3-center">
+            <p>Valóban törölni szeretné a tanulót és vele minden osztályzatát?</p>
+        </div>
+        <footer class="w3-container w3-padding w3-center">
+            <a id="btn-torles" asp-controller="Tanulo" asp-action="TanuloTorles" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-check w3-margin-right"></i>Törlés</a>
+            <a id="btn-megsem" onclick="document.getElementById('tanulo-torles-modal').style.display='none'" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-times w3-margin-right"></i>Mégsem</a>
+        </footer>
+    </div>
 </div>
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.OsztalyId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OsztalyNev)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OsztalyFonok)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tanterem)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OsztalyId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OsztalyNev)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OsztalyFonok)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tanterem)
-                    </td>
-                    <td>
-                        <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@item.OsztalyId">Megtekint</a>
-                        <a asp-controller="Osztaly" asp-action="OsztalyModositasForm" asp-route-id="@item.OsztalyId">Módosítás</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
