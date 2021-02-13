@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TanulokMVC.Models.TanuloModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VezetekNev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeresztNev)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VezetekNev)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeresztNev)
+            </td>
+            <td>
+                @foreach (var osztalyzat in item.Osztalyzatok)
+                {
+                    <p>
+                        @Html.DisplayFor(jegy => osztalyzat.Osztalyzat);
+                    </p>
+
+                }
+                </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

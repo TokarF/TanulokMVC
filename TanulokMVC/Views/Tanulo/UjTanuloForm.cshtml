@@ -1,0 +1,65 @@
+﻿@model TanulokMVC.Models.TanuloModel
+
+@{
+    ViewData["Title"] = "UjtanuloForm";
+}
+
+<div class="w3-container" style="margin-top:50px; margin-bottom:50px;">
+    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Új Tanuló</b></h1>
+</div>
+
+<div class="w3-card-4  w3-margin-right w3-margin-left">
+    <header class="w3-container w3-green">
+        <h3>Adatok</h3>
+    </header>
+    <div asp-validation-summary="ModelOnly" class="w3-text-red"></div>
+    <form class="w3-container" asp-action="UjTanulo">
+        <input type="hidden" asp-for="OsztalyId" value="@ViewBag.OsztalyId" />
+        <p>
+            <label class="">Vezetéknév</label>
+            <input asp-for="VezetekNev" class="w3-input" type="text">
+            <span asp-validation-for="VezetekNev" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label>Keresztnév</label>
+            <input asp-for="KeresztNev" class="w3-input" type="text">
+            <span asp-validation-for="KeresztNev" class="w3-text-red"></span>
+        </p>
+        <p class="w3-center">
+            <button type="submit" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-user-plus w3-margin-right"></i>Felvitel</button>
+            <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@ViewBag.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+        </p>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+@*<h1>UjtanuloForm</h1>*@
+@*<h4>TanuloModel</h4>
+    <hr />*@
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-action="UjTanulo">
+                <input type="hidden" asp-for="OsztalyId" value="@ViewBag.OsztalyId" />
+                <div class="form-group">
+                    <label asp-for="VezetekNev" class="control-label"></label>
+                    <input asp-for="VezetekNev" class="form-control" />
+                    <span asp-validation-for="VezetekNev" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="KeresztNev" class="control-label"></label>
+                    <input asp-for="KeresztNev" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@

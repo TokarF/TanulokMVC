@@ -1,0 +1,122 @@
+﻿@model TanulokMVC.Models.OsztalyModel
+
+@{
+    ViewData["Title"] = "OsztalyAdatok";
+    var tanulo = TempData["Uzenet"];
+
+}
+
+
+<div class="w3-container" style="margin-top:50px; margin-bottom:50px;">
+    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Osztály</b></h1>
+</div>
+
+
+@{if (tanulo != null)
+    {
+        <div class="w3-panel w3-light-gray w3-card-4 w3-display-container w3-margin-right w3-margin-left">
+            <span onclick="this.parentElement.style.display='none'"
+                  class="w3-button w3-display-topright">X</span>
+            @switch (tanulo.ToString().ToLower())
+            {
+                case "hozzaadas_siker":
+                    <p class="w3-text-green">Tanuló sikeresen hozzáadva!</p>
+                    break;
+                case "hozzaadas_hiba":
+                    <p class="w3-text-red">Hiba történt a tanuló hozzáadásakor!</p>
+                    break;
+                case "modositas_siker":
+                    <p class="w3-text-green">Tanuló sikeresen módosítva!</p>
+                    break;
+                case "modositas_hiba":
+                    <p class="w3-text-red">Hiba történt a tanuló módosításakor!</p>
+                    break;
+                case "torles_siker":
+                    <p class="w3-text-green">Tanuló sikeresen törölve!</p>
+                    break;
+                case "torles_hiba":
+                    <p class="w3-text-red">Hiba történt a tanuló törlésekor!</p>
+                    break;
+            }
+        </div>
+    }
+}
+
+<div class="w3-card-4 w3-margin-right w3-margin-left" style="margin-bottom: 50px;">
+    <header class="w3-container w3-green">
+        <h3 id="osztalyNev">@Html.DisplayFor(model => model.OsztalyNev)</h3>
+    </header>
+    <div id="osztalyAdatok" class="w3-row-padding">
+        <div class="w3-col m4 l2">
+            <p>@Html.DisplayNameFor(model => model.OsztalyFonok)</p>
+        </div>
+        <div class="w3-col m8 l10">
+            <p>@Html.DisplayFor(model => model.OsztalyFonok)</p>
+        </div>
+        <div class="w3-col m4 l2">
+            <p>@Html.DisplayNameFor(model => model.Tanterem)</p>
+        </div>
+        <div class="w3-col m8 l10">
+            <p>@Html.DisplayFor(model => model.Tanterem)</p>
+        </div>
+        <div class="w3-col m4 l2">
+            <p>Létszám</p>
+        </div>
+        <div class="w3-col m8 l10">
+            <p>@Model.diakok.Count() fő</p>
+        </div>
+    </div>
+</div>
+<div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
+    <a asp-controller="Tanulo" asp-action="UjTanuloForm" asp-route-osztalyId="@Model.OsztalyId" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-user-plus w3-margin-right"></i>Új Tanuló</a>
+</div>
+
+<div class="w3-card-4 w3-margin-right w3-margin-left" id="osztaly" style="margin-bottom: 50px">
+    <table class="w3-table w3-bordered w3-striped w3-centered">
+        <thead>
+            <tr class="w3-green w3-border-0">
+                <th>Tanuló ID</th>
+                <th>Név</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Osztályhoz tartozó diákok táblába írása *@
+            @foreach (TanuloModel diak in Model.diakok)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => diak.TanuloId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => diak.VezetekNev) @Html.DisplayFor(modelItem => diak.KeresztNev)
+                    </td>
+                    <td>
+                        <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-user"></i></a>
+                        <a asp-controller="Tanulo" asp-action="TanuloModositasForm" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-user-edit"></i></a>
+                        <a id="btn-tanulo-torles" data-value="@diak.TanuloId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
+    <a asp-controller="Osztaly" asp-action="Index" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+</div>
+
+@* Tanuló törlés Modal *@
+<div id="tanulo-torles-modal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-red w3-center">
+            <h2>Tanuló Törlés</h2>
+        </header>
+        <div class="w3-container w3-center">
+            <p>Valóban törölni szeretné a tanulót és vele minden osztályzatát?</p>
+        </div>
+        <footer class="w3-container w3-padding w3-center">
+            <a id="btn-torles" asp-controller="Tanulo" asp-action="TanuloTorles" asp-route-osztalyId="@Model.OsztalyId" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-check w3-margin-right"></i>Törlés</a>
+            <a id="btn-megsem" onclick="document.getElementById('tanulo-torles-modal').style.display='none'" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-times w3-margin-right"></i>Mégsem</a>
+        </footer>
+    </div>
+</div>

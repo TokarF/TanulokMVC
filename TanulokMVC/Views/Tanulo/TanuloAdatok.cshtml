@@ -1,0 +1,217 @@
+﻿@model TanulokMVC.Models.TanuloModel
+
+@{
+    ViewData["Title"] = "Tanuló Adatok";
+    var osztalyzatUzenet = TempData["Uzenet"];
+
+}
+
+@functions{
+    string OsztalyzatSzin(int osztalyzat)
+    {
+        string szin = "";
+        switch (osztalyzat)
+        {
+            case 1:
+                szin = "w3-text-red w3-border w3-border-red w3-hover-red";
+                break;
+            case 2:
+                szin = "w3-text-orange w3-border w3-border-orange w3-hover-orange";
+                break;
+            case 3:
+                szin = "w3-text-blue w3-border w3-border-blue w3-hover-blue";
+                break;
+            case 4:
+                szin = "w3-text-green w3-border w3-border-green w3-hover-green";
+                break;
+            case 5:
+                szin = "w3-text-teal w3-border w3-border-teal w3-hover-teal";
+                break;
+        }
+
+        return szin;
+    }
+}
+
+<div class="w3-container" style="margin-top:50px; margin-bottom:50px;">
+    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Tanuló</b></h1>
+</div>
+
+@{if (osztalyzatUzenet != null)
+    {
+        <div class="w3-panel w3-light-gray w3-card-4 w3-display-container w3-margin-right w3-margin-left">
+            <span onclick="this.parentElement.style.display='none'"
+                  class="w3-button w3-display-topright">X</span>
+            @switch (osztalyzatUzenet.ToString().ToLower())
+            {
+                case "hozzaadas_siker":
+                    <p class="w3-text-green">Osztályzat sikeresen hozzáadva!</p>
+                    break;
+                case "hozzaadas_hiba":
+                    <p class="w3-text-red">Hiba történt az osztályzat hozzáadásakor!</p>
+                    break;
+                case "modositas_siker":
+                    <p class="w3-text-green">Osztályzat sikeresen módosítva!</p>
+                    break;
+                case "modositas_hiba":
+                    <p class="w3-text-red">Hiba történt az osztályzat módosításakor!</p>
+                    break;
+                case "torles_siker":
+                    <p class="w3-text-green">Osztályzat sikeresen törölve!</p>
+                    break;
+                case "torles_hiba":
+                    <p class="w3-text-red">Hiba történt az osztályzat törlésekor!</p>
+                    break;
+            }
+        </div>
+    }
+}
+
+<div id="tanulo-adatok" class="w3-card-4 w3-margin-right w3-margin-left" style="margin-bottom: 50px;">
+    <header class="w3-container w3-green">
+        <h3 id="tanuloNev">@Html.DisplayFor(model => model.VezetekNev) @Html.DisplayFor(model => model.KeresztNev)</h3>
+    </header>
+    <div class="w3-row-padding">
+        <div class="w3-col m4 l2">
+            <p>@Html.DisplayNameFor(model => model.TanuloId)</p>
+        </div>
+        <div class="w3-col m8 l10">
+            <p>@Html.DisplayFor(model => model.TanuloId) </p>
+        </div>
+        <div class="w3-col m4 l2">
+            <p>@Html.DisplayNameFor(model => model.OsztalyId)</p>
+        </div>
+        <div class="w3-col m8 l10">
+            <p>@Html.DisplayFor(model => model.OsztalyId)</p>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
+    <a asp-controller="Osztalyzat" asp-action="UjOsztalyzatForm" asp-route-tanuloId="@Model.TanuloId" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-plus w3-margin-right"></i>Új Osztályzat</a>
+</div>
+
+<div class="w3-card-4 w3-margin-right w3-margin-left " id="osztalyzatok" style="margin-bottom: 50px">
+    <table class="w3-table w3-bordered w3-striped w3-centered">
+        <tbody>
+            <tr class="w3-green w3-border-0">
+                <th class="w3-center" colspan="3"><h4><b>Osztályzatok</b></h4></th>
+            </tr>
+            <tr class="w3-green">
+                <th style="width: 10%;"><h5>Tantárgyak</h5></th>
+                <th class=""><h5>Jegyek</h5></th>
+                <th style="width: 10%;"><h5>Átlag</h5></th>
+            </tr>
+        </tbody>
+        <tbody>
+            @foreach (Tantargyak tantargy in Enum.GetValues(typeof(Tantargyak)))
+            {
+                int osszeg = 0;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => tantargy)
+                    </td>
+                    <td class="w3-left">
+                        @foreach (OsztalyzatModel osztalyzat in Model.osztalyzatok)
+                        {
+                            if (osztalyzat.Tantargy == tantargy)
+                            {
+                                <a class="w3-button w3-white @OsztalyzatSzin(osztalyzat.Osztalyzat) w3-round" asp-controller="Osztalyzat" asp-action="OsztalyzatAdatok" asp-route-Id="@osztalyzat.OsztalyzatId">@Html.DisplayFor(model => osztalyzat.Osztalyzat)</a>
+                                osszeg += osztalyzat.Osztalyzat;
+                            }
+                        }
+                    </td>
+                    @* Átlag kiszámítása *@
+                    @{List<OsztalyzatModel> osztalyzatok = Model.osztalyzatok.Where(osztalyzat => osztalyzat.Tantargy == tantargy).ToList();
+                        double atlag = osztalyzatok.Count() > 0 ? osztalyzatok.Average(osztalyzat => osztalyzat.Osztalyzat) : 0;
+                    }
+                    <td>
+                        @if (atlag != 0)
+                        {
+                            <a style="pointer-events: none" class="w3-button @OsztalyzatSzin((int)Math.Floor(atlag)) w3-round">@Math.Round(atlag, 2)</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
+    <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@Model.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+</div>
+
+
+
+@*<div>
+        <h4>TanuloModel</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TanuloId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TanuloId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OsztalyId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.OsztalyId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VezetekNev)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VezetekNev)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KeresztNev)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KeresztNev)
+
+            </dd>
+        </dl>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tantárgy</th>
+                    <th>Osztályzatok</th>
+                    <th>Átlag</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Tantargyak tantargy in Enum.GetValues(typeof(Tantargyak)))
+                {
+                    int osszeg = 0;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => tantargy)
+                        </td>
+                        <td>
+                            @foreach (OsztalyzatModel osztalyzat in Model.osztalyzatok)
+                            {
+                                if (osztalyzat.Tantargy == tantargy)
+                                {
+                                    <a class="mr-2" asp-controller="Osztalyzat" asp-action="OsztalyzatAdatok" asp-route-Id="@osztalyzat.OsztalyzatId">@Html.DisplayFor(model => osztalyzat.Osztalyzat)</a>
+                                    osszeg += osztalyzat.Osztalyzat;
+                                }
+                            }
+                        </td>
+                        @{List<OsztalyzatModel> osztalyzatok = Model.osztalyzatok.Where(osztalyzat => osztalyzat.Tantargy == tantargy).ToList();
+                            double atlag = osztalyzatok.Count() > 0 ? osztalyzatok.Average(osztalyzat => osztalyzat.Osztalyzat) : 0;
+                        }
+                        <td>
+                            @if (atlag != 0)
+                            {@Math.Round(atlag, 2)}
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+@*<div>
+        <a asp-controller="Osztalyzat" asp-action="UjOsztalyzatForm" asp-route-tanuloId="@Model.TanuloId">Új osztályzat</a>
+
+    </div>*@

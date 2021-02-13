@@ -1,0 +1,122 @@
+﻿@model TanulokMVC.Models.OsztalyzatModel
+
+@{
+    ViewData["Title"] = "Osztályzat Módosítás";
+}
+
+
+<div class="w3-container" style="margin-top:50px; margin-bottom:50px;">
+    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Osztályzat Módosítás</b></h1>
+</div>
+
+<div class="w3-card-4 w3-margin-right w3-margin-left">
+    <header class="w3-container w3-green">
+        <h3>Adatok</h3>
+    </header>
+    <form class="w3-container" asp-action="OsztalyzatModositas">
+        <div asp-validation-summary="ModelOnly" class="w3-text-red"></div>
+        <input type="hidden" asp-for="OsztalyzatId" />
+        <input type="hidden" asp-for="TanuloId" />
+        <p>
+            <label asp-for="Tantargy"></label>
+            <select asp-items="Html.GetEnumSelectList<Tantargyak>()" asp-for="Tantargy" class="w3-select"></select>
+            <span asp-validation-for="Tantargy" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label asp-for="OsztalyzatTipus" ></label>
+            <select asp-items="Html.GetEnumSelectList<OsztalyzatTipus>()" asp-for="OsztalyzatTipus" class="w3-select"></select>
+            <span asp-validation-for="OsztalyzatTipus" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label asp-for="Osztalyzat"></label>
+            <input asp-for="Osztalyzat" class="w3-input" type="number"/>
+            <span asp-validation-for="Osztalyzat" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label asp-for="Megnevezes"></label>
+            <input asp-for="Megnevezes" class="w3-input" type="text" />
+            <span asp-validation-for="Megnevezes" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label asp-for="Megjegyzes" ></label>
+            <input asp-for="Megjegyzes" class="w3-input" type="text" />
+            <span asp-validation-for="Megjegyzes" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label class="w3-margin-right">@Html.DisplayNameFor(model => model.Sulyozott)</label>
+            <input class="w3-check" asp-for="Sulyozott" />
+        </p>
+        <p>
+            <label asp-for="Datum"></label>
+            <input asp-for="Datum" class="w3-input" type="date" />
+            <span asp-validation-for="Datum" class="text-danger"></span>
+        </p>
+
+        <p class="w3-center">
+            <button type="submit" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-save w3-margin-right"></i>Mentés</button>
+            <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@Model.TanuloId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+        </p>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+@*<h1>OsztalyzatModositasForm</h1>*@
+
+@*<h4>OsztalyzatModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="OsztalyzatModositas">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="OsztalyzatId" class="form-control" />
+                <input type="hidden" asp-for="TanuloId" class="form-control" />
+                <div class="form-group">
+                    <label asp-for="Tantargy" class="control-label"></label>
+                    <select asp-items="Html.GetEnumSelectList<Tantargyak>()" asp-for="Tantargy" class="form-control"></select>
+                    <span asp-validation-for="Tantargy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OsztalyzatTipus" class="control-label"></label>
+                    <select asp-items="Html.GetEnumSelectList<OsztalyzatTipus>()" asp-for="OsztalyzatTipus" class="form-control"></select>
+                    <span asp-validation-for="OsztalyzatTipus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Osztalyzat" class="control-label"></label>
+                    <input asp-for="Osztalyzat" class="form-control" />
+                    <span asp-validation-for="Osztalyzat" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Megnevezes" class="control-label"></label>
+                    <input asp-for="Megnevezes" class="form-control" />
+                    <span asp-validation-for="Megnevezes" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Megjegyzes" class="control-label"></label>
+                    <input asp-for="Megjegyzes" class="form-control" />
+                    <span asp-validation-for="Megjegyzes" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Sulyozott" /> @Html.DisplayNameFor(model => model.Sulyozott)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Datum" class="control-label"></label>
+                    <input asp-for="Datum" class="form-control" />
+                    <span asp-validation-for="Datum" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+@*<div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+

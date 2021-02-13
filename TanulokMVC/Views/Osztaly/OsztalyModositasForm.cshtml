@@ -1,0 +1,79 @@
+﻿@model TanulokMVC.Models.OsztalyModel
+
+@{
+    ViewData["Title"] = "Osztály Módosítás";
+}
+
+<div class="w3-container" style="margin-top:50px; margin-bottom:50px;">
+    <h1 class="w3-xxxlarge w3-text-green w3-center w3-border-bottom w3-padding w3-wide"><b>Osztály Módosítás</b></h1>
+</div>
+
+<div class="w3-card-4 w3-margin-right w3-margin-left">
+    <header class="w3-container w3-green">
+        <h3>Adatok</h3>
+    </header>
+    <form class="w3-container" asp-action="OsztalyModositas">
+        <div asp-validation-summary="ModelOnly" class="w3-text-red"></div>
+        <input type="hidden" asp-for="OsztalyId" />
+        <p>
+            <label asp-for="OsztalyNev"></label>
+            <input asp-for="OsztalyNev" class="w3-input" type="text" required />
+            <span asp-validation-for="OsztalyNev" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label asp-for="OsztalyFonok"></label>
+            <input asp-for="OsztalyFonok" class="w3-input" type="text" required />
+            <span asp-validation-for="OsztalyFonok" class="w3-text-red"></span>
+        </p>
+        <p>
+            <label asp-for="Tanterem"></label>
+            <input asp-for="Tanterem" class="w3-input" type="number" min="100" max="400" required />
+            <span asp-validation-for="Tanterem" class="w3-text-red"></span>
+        </p>
+        <p class="w3-center">
+            <button type="submit" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-save w3-margin-right"></i>Mentés</button>
+            <a asp-controller="Osztaly" asp-action="Index" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+        </p>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+@*<h1>OsztalyModositasForm</h1>
+
+    <h4>OsztalyModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="OsztalyModositas">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="OsztalyId" class="form-control" />
+                <div class="form-group">
+                    <label asp-for="OsztalyNev" class="control-label"></label>
+                    <input asp-for="OsztalyNev" class="form-control" />
+                    <span asp-validation-for="OsztalyNev" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="OsztalyFonok" class="control-label"></label>
+                    <input asp-for="OsztalyFonok" class="form-control" />
+                    <span asp-validation-for="OsztalyFonok" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tanterem" class="control-label"></label>
+                    <input asp-for="Tanterem" class="form-control" />
+                    <span asp-validation-for="Tanterem" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
