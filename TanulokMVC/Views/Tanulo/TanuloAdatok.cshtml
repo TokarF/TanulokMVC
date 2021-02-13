@@ -93,7 +93,7 @@
 
 <div class="w3-card-4 w3-margin-right w3-margin-left " id="osztalyzatok" style="margin-bottom: 50px">
     <table class="w3-table w3-bordered w3-striped w3-centered">
-        <tbody>
+        <thead>
             <tr class="w3-green w3-border-0">
                 <th class="w3-center" colspan="3"><h4><b>Osztályzatok</b></h4></th>
             </tr>
@@ -102,8 +102,9 @@
                 <th class=""><h5>Jegyek</h5></th>
                 <th style="width: 10%;"><h5>Átlag</h5></th>
             </tr>
-        </tbody>
+        </thead>
         <tbody>
+            @* Tantárgyak felsorolása az első oszlopban *@
             @foreach (Tantargyak tantargy in Enum.GetValues(typeof(Tantargyak)))
             {
                 int osszeg = 0;
@@ -112,6 +113,7 @@
                         @Html.DisplayFor(model => tantargy)
                     </td>
                     <td class="w3-left">
+                        @* Tantárgyannként az osztályzatok kiíratása *@
                         @foreach (OsztalyzatModel osztalyzat in Model.osztalyzatok)
                         {
                             if (osztalyzat.Tantargy == tantargy)
@@ -140,5 +142,8 @@
 <div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
     <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@Model.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
 </div>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> beb25cbd7eb828abc9bf8ca4552e757525394620

@@ -20,6 +20,23 @@ namespace TanulokMVC.Controllers
             return View(osztalyDAO.OsszesOsztaly());
         }
 
+        // Osztályok tanulókkal lista nézet
+        public IActionResult OsztalyokTanulokkalLista(string kereses = "")
+        {
+            List<OsztalyModel> osztalyok = osztalyDAO.OsszesOsztaly();
+            if (kereses != null)
+            {
+                osztalyok.ForEach(osztaly => osztaly.diakok = tanuloDAO.OsztalyTanulok(osztaly.OsztalyId).Where(tanulo => tanulo.KeresztNev.ToLower().Contains(kereses.ToLower()) || tanulo.VezetekNev.ToLower().Contains(kereses.ToLower())).ToList());
+            }
+            else
+            {
+                osztalyok.ForEach(osztaly => osztaly.diakok = tanuloDAO.OsztalyTanulok(osztaly.OsztalyId));
+
+            }
+
+            return View(osztalyok);
+        }
+
 
 
         public IActionResult OsztalyAdatok(int id)

@@ -94,7 +94,7 @@
                     <td>
                         <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-user"></i></a>
                         <a asp-controller="Tanulo" asp-action="TanuloModositasForm" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-user-edit"></i></a>
-                        <a id="btn-tanulo-torles" data-value="@diak.TanuloId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
+                        <a id="btn-tanulo-torles" data-value-tanuloId="@diak.TanuloId" data-value-osztalyID="@diak.OsztalyId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
                     </td>
                 </tr>
             }
@@ -115,7 +115,7 @@
             <p>Valóban törölni szeretné a tanulót és vele minden osztályzatát?</p>
         </div>
         <footer class="w3-container w3-padding w3-center">
-            <a id="btn-torles" asp-controller="Tanulo" asp-action="TanuloTorles" asp-route-osztalyId="@Model.OsztalyId" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-check w3-margin-right"></i>Törlés</a>
+            <a id="btn-torles" asp-controller="Tanulo" asp-action="TanuloTorles" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-check w3-margin-right"></i>Törlés</a>
             <a id="btn-megsem" onclick="document.getElementById('tanulo-torles-modal').style.display='none'" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-times w3-margin-right"></i>Mégsem</a>
         </footer>
     </div>
