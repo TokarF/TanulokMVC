@@ -20,6 +20,15 @@ namespace TanulokMVC.Controllers
             return View(osztalyDAO.OsszesOsztaly());
         }
 
+        // Osztályok tanulókkal lista nézet
+        public IActionResult OsztalyokTanulokkalLista()
+        {
+            List<OsztalyModel> osztalyok = osztalyDAO.OsszesOsztaly();
+            osztalyok.ForEach(osztaly => osztaly.diakok = tanuloDAO.OsztalyTanulok(osztaly.OsztalyId));
+
+            return View(osztalyok);
+        }
+
 
 
         public IActionResult OsztalyAdatok(int id)

@@ -131,3 +131,4 @@ C:\Users\user\source\repos\TanulokMVC\TanulokMVC\obj\Debug\net5.0\Razor\Views\Os
 C:\Users\user\source\repos\TanulokMVC\TanulokMVC\obj\Debug\net5.0\Razor\Views\Tanulo\TanuloModositasForm.cshtml.g.cs
 C:\Users\user\source\repos\TanulokMVC\TanulokMVC\obj\Debug\net5.0\Razor\Views\Tanulo\UjTanuloForm.cshtml.g.cs
 C:\Users\user\source\repos\TanulokMVC\TanulokMVC\obj\Debug\net5.0\Razor\Views\Osztalyzat\OsztalyzatModositasForm.cshtml.g.cs
+C:\Users\user\source\repos\TanulokMVC\TanulokMVC\obj\Debug\net5.0\Razor\Views\Osztaly\OsztalyokTanulokkalLista.cshtml.g.cs

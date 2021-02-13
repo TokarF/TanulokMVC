@@ -93,7 +93,7 @@
 
 <div class="w3-card-4 w3-margin-right w3-margin-left " id="osztalyzatok" style="margin-bottom: 50px">
     <table class="w3-table w3-bordered w3-striped w3-centered">
-        <tbody>
+        <thead>
             <tr class="w3-green w3-border-0">
                 <th class="w3-center" colspan="3"><h4><b>Osztályzatok</b></h4></th>
             </tr>
@@ -102,8 +102,9 @@
                 <th class=""><h5>Jegyek</h5></th>
                 <th style="width: 10%;"><h5>Átlag</h5></th>
             </tr>
-        </tbody>
+        </thead>
         <tbody>
+            @* Tantárgyak felsorolása az első oszlopban *@
             @foreach (Tantargyak tantargy in Enum.GetValues(typeof(Tantargyak)))
             {
                 int osszeg = 0;
@@ -112,6 +113,7 @@
                         @Html.DisplayFor(model => tantargy)
                     </td>
                     <td class="w3-left">
+                        @* Tantárgyannként az osztályzatok kiíratása *@
                         @foreach (OsztalyzatModel osztalyzat in Model.osztalyzatok)
                         {
                             if (osztalyzat.Tantargy == tantargy)
@@ -140,78 +142,3 @@
 <div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
     <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@Model.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
 </div>
-
-
-
-@*<div>
-        <h4>TanuloModel</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TanuloId)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TanuloId)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.OsztalyId)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.OsztalyId)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.VezetekNev)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.VezetekNev)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.KeresztNev)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.KeresztNev)
-
-            </dd>
-        </dl>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Tantárgy</th>
-                    <th>Osztályzatok</th>
-                    <th>Átlag</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Tantargyak tantargy in Enum.GetValues(typeof(Tantargyak)))
-                {
-                    int osszeg = 0;
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(model => tantargy)
-                        </td>
-                        <td>
-                            @foreach (OsztalyzatModel osztalyzat in Model.osztalyzatok)
-                            {
-                                if (osztalyzat.Tantargy == tantargy)
-                                {
-                                    <a class="mr-2" asp-controller="Osztalyzat" asp-action="OsztalyzatAdatok" asp-route-Id="@osztalyzat.OsztalyzatId">@Html.DisplayFor(model => osztalyzat.Osztalyzat)</a>
-                                    osszeg += osztalyzat.Osztalyzat;
-                                }
-                            }
-                        </td>
-                        @{List<OsztalyzatModel> osztalyzatok = Model.osztalyzatok.Where(osztalyzat => osztalyzat.Tantargy == tantargy).ToList();
-                            double atlag = osztalyzatok.Count() > 0 ? osztalyzatok.Average(osztalyzat => osztalyzat.Osztalyzat) : 0;
-                        }
-                        <td>
-                            @if (atlag != 0)
-                            {@Math.Round(atlag, 2)}
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>*@
-@*<div>
-        <a asp-controller="Osztalyzat" asp-action="UjOsztalyzatForm" asp-route-tanuloId="@Model.TanuloId">Új osztályzat</a>
-
-    </div>*@
