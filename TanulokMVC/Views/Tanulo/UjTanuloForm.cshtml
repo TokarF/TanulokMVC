@@ -27,7 +27,7 @@
         </p>
         <p class="w3-center">
             <button type="submit" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-user-plus w3-margin-right"></i>Felvitel</button>
-            <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@ViewBag.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+            <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-osztalyId="@ViewBag.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
         </p>
     </form>
 </div>
@@ -36,30 +36,3 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-
-@*<h1>UjtanuloForm</h1>*@
-@*<h4>TanuloModel</h4>
-    <hr />*@
-@*<div class="row">
-        <div class="col-md-4">
-            <form asp-action="UjTanulo">
-                <input type="hidden" asp-for="OsztalyId" value="@ViewBag.OsztalyId" />
-                <div class="form-group">
-                    <label asp-for="VezetekNev" class="control-label"></label>
-                    <input asp-for="VezetekNev" class="form-control" />
-                    <span asp-validation-for="VezetekNev" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="KeresztNev" class="control-label"></label>
-                    <input asp-for="KeresztNev" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@

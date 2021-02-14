@@ -46,7 +46,7 @@ namespace TanulokMVC.Services
         }
 
 
-        internal TanuloModel TanuloIdAlapjan(int id)
+        public TanuloModel TanuloIdAlapjan(int id)
         {
             TanuloModel tanulo = null;
 

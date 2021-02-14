@@ -37,6 +37,12 @@
                 case "torles_hiba":
                     <p class="w3-text-red">Hiba történt a tanuló törlésekor!</p>
                     break;
+                case "osztalyzat_hozzaadas_hiba":
+                    <p class="w3-text-red">Hiba történt az osztályzat hozzáadásakor! Tanuló törölve lett az adatbázisból!</p>
+                    break;
+                case "osztalyzat_modositas_hiba":
+                    <p class="w3-text-red">Hiba történt az osztályzat módosításakor! Tanuló törölve lett az adatbázisból!</p>
+                    break;
             }
         </div>
     }
@@ -47,22 +53,22 @@
         <h3 id="osztalyNev">@Html.DisplayFor(model => model.OsztalyNev)</h3>
     </header>
     <div id="osztalyAdatok" class="w3-row-padding">
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.OsztalyFonok)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.OsztalyFonok)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.OsztalyFonok)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.Tanterem)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.Tanterem)</b> </p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.Tanterem)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>Létszám</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>Létszám</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Model.diakok.Count() fő</p>
         </div>
     </div>
@@ -71,7 +77,7 @@
     <a asp-controller="Tanulo" asp-action="UjTanuloForm" asp-route-osztalyId="@Model.OsztalyId" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-user-plus w3-margin-right"></i>Új Tanuló</a>
 </div>
 
-<div class="w3-card-4 w3-margin-right w3-margin-left" id="osztaly" style="margin-bottom: 50px">
+<div class="w3-card-4 w3-margin-right w3-margin-left w3-responsive" id="osztaly" style="margin-bottom: 50px">
     <table class="w3-table w3-bordered w3-striped w3-centered">
         <thead>
             <tr class="w3-green w3-border-0">
@@ -94,7 +100,7 @@
                     <td>
                         <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-user"></i></a>
                         <a asp-controller="Tanulo" asp-action="TanuloModositasForm" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-user-edit"></i></a>
-                        <a id="btn-tanulo-torles" data-value-tanuloId="@diak.TanuloId" data-value-osztalyID="@diak.OsztalyId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
+                        <a id="btn-tanulo-torles" data-value-tanuloId="@diak.TanuloId" data-value-osztalyId="@diak.OsztalyId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
                     </td>
                 </tr>
             }

@@ -44,3 +44,12 @@ body {
     background: #009688;
     color: #fff !important;
 }
+
+table {
+    white-space: nowrap;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}

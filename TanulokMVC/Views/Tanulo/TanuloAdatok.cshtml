@@ -39,31 +39,34 @@
 
 @{if (osztalyzatUzenet != null)
     {
-        <div class="w3-panel w3-light-gray w3-card-4 w3-display-container w3-margin-right w3-margin-left">
-            <span onclick="this.parentElement.style.display='none'"
-                  class="w3-button w3-display-topright">X</span>
-            @switch (osztalyzatUzenet.ToString().ToLower())
-            {
-                case "hozzaadas_siker":
-                    <p class="w3-text-green">Osztályzat sikeresen hozzáadva!</p>
-                    break;
-                case "hozzaadas_hiba":
-                    <p class="w3-text-red">Hiba történt az osztályzat hozzáadásakor!</p>
-                    break;
-                case "modositas_siker":
-                    <p class="w3-text-green">Osztályzat sikeresen módosítva!</p>
-                    break;
-                case "modositas_hiba":
-                    <p class="w3-text-red">Hiba történt az osztályzat módosításakor!</p>
-                    break;
-                case "torles_siker":
-                    <p class="w3-text-green">Osztályzat sikeresen törölve!</p>
-                    break;
-                case "torles_hiba":
-                    <p class="w3-text-red">Hiba történt az osztályzat törlésekor!</p>
-                    break;
-            }
-        </div>
+    <div class="w3-panel w3-light-gray w3-card-4 w3-display-container w3-margin-right w3-margin-left">
+        <span onclick="this.parentElement.style.display='none'"
+              class="w3-button w3-display-topright">X</span>
+        @switch (osztalyzatUzenet.ToString().ToLower())
+        {
+            case "hozzaadas_siker":
+                <p class="w3-text-green">Osztályzat sikeresen hozzáadva!</p>
+                break;
+            case "hozzaadas_hiba":
+                <p class="w3-text-red">Hiba történt az osztályzat hozzáadásakor!</p>
+                break;
+            case "modositas_siker":
+                <p class="w3-text-green">Osztályzat sikeresen módosítva!</p>
+                break;
+            case "modositas_hiba":
+                <p class="w3-text-red">Hiba történt az osztályzat módosításakor!</p>
+                break;
+            case "torles_siker":
+                <p class="w3-text-green">Osztályzat sikeresen törölve!</p>
+                break;
+            case "torles_hiba":
+                <p class="w3-text-red">Hiba történt az osztályzat törlésekor!</p>
+                break;
+            case "nincs_talalat":
+                <p class="w3-text-red">Nem található az osztályzat! Valószínűleg törölve lett az adatbázisból!</p>
+                break;
+        }
+    </div>
     }
 }
 
@@ -72,26 +75,26 @@
         <h3 id="tanuloNev">@Html.DisplayFor(model => model.VezetekNev) @Html.DisplayFor(model => model.KeresztNev)</h3>
     </header>
     <div class="w3-row-padding">
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.TanuloId)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.TanuloId)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.TanuloId) </p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.OsztalyId)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.OsztalyId)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.OsztalyId)</p>
         </div>
     </div>
 </div>
 
 <div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
-    <a asp-controller="Osztalyzat" asp-action="UjOsztalyzatForm" asp-route-tanuloId="@Model.TanuloId" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-plus w3-margin-right"></i>Új Osztályzat</a>
+    <a asp-controller="Osztalyzat" asp-action="UjOsztalyzatForm" asp-route-tanuloId="@Model.TanuloId" asp-route-osztalyId="@Model.OsztalyId" class="w3-button w3-white w3-text-green w3-border w3-border-green w3-hover-green w3-round"><i class="fas fa-plus w3-margin-right"></i>Új Osztályzat</a>
 </div>
 
-<div class="w3-card-4 w3-margin-right w3-margin-left " id="osztalyzatok" style="margin-bottom: 50px">
+<div class="w3-card-4 w3-margin-right w3-margin-left w3-responsive" id="osztalyzatok" style="margin-bottom: 50px">
     <table class="w3-table w3-bordered w3-striped w3-centered">
         <thead>
             <tr class="w3-green w3-border-0">
@@ -118,7 +121,7 @@
                         {
                             if (osztalyzat.Tantargy == tantargy)
                             {
-                                <a class="w3-button w3-white @OsztalyzatSzin(osztalyzat.Osztalyzat) w3-round" asp-controller="Osztalyzat" asp-action="OsztalyzatAdatok" asp-route-Id="@osztalyzat.OsztalyzatId">@Html.DisplayFor(model => osztalyzat.Osztalyzat)</a>
+                                <a class="w3-button w3-white @OsztalyzatSzin(osztalyzat.Osztalyzat) w3-round" asp-controller="Osztalyzat" asp-action="OsztalyzatAdatok" asp-route-osztalyzatId="@osztalyzat.OsztalyzatId" asp-route-tanuloId="@Model.TanuloId">@Html.DisplayFor(model => osztalyzat.Osztalyzat)</a>
                                 osszeg += osztalyzat.Osztalyzat;
                             }
                         }
@@ -141,6 +144,6 @@
 </div>
 
 <div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
-    <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@Model.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+    <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-osztalyId="@Model.OsztalyId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
 </div>
 

@@ -18,11 +18,12 @@
 {
     if (osztaly.diakok.Count() > 0)
     {
-        <div class="w3-card-4 w3-margin-right w3-margin-left w3-round" id="osztaly-@osztaly.OsztalyId" style="margin-bottom: 50px">
+        <div class="w3-card-4 w3-responsive w3-margin-right w3-margin-left w3-round" id="osztaly-@osztaly.OsztalyId" style="margin-bottom: 50px">
             <table class="w3-table w3-bordered w3-striped w3-centered">
                 <thead>
                     <tr class="w3-green w3-border-0">
-                        <th style="width: 20%;"><h5>@Html.DisplayNameFor(model => model.OsztalyNev): @osztaly.OsztalyNev                         <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-id="@osztaly.OsztalyId" class="w3-text-white w3-margin-left"><i class="fas fa-eye"></i></a></h5></th>
+                        <th style="width: 20%;"><h5>@Html.DisplayNameFor(model => model.OsztalyNev): @osztaly.OsztalyNev    
+                            <a asp-controller="Osztaly" asp-action="OsztalyAdatok" asp-route-osztalyId="@osztaly.OsztalyId" class="w3-text-white w3-margin-left"><i class="fas fa-eye"></i></a></h5></th>
                         <th class=""><h5>@Html.DisplayNameFor(model => model.OsztalyFonok): @osztaly.OsztalyFonok</h5></th>
                         <th style="width: 20%;"><h5>@Html.DisplayNameFor(model => model.Tanterem): @osztaly.Tanterem</h5></th>
                     </tr>
@@ -40,9 +41,7 @@
                             <td>@diak.TanuloId</td>
                             <td>@diak.VezetekNev @diak.KeresztNev</td>
                             <td>
-                                <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-user"></i></a>
-                                <a asp-controller="Tanulo" asp-action="TanuloModositasForm" asp-route-tanuloId="@diak.TanuloId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-user-edit"></i></a>
-                                <a id="btn-tanulo-torles" data-value-tanuloId="@diak.TanuloId" data-value-osztalyId="@osztaly.OsztalyId" onclick="document.getElementById('tanulo-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-user-times"></i></a>
+                                <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloId="@diak.TanuloId" asp-route-osztalyId="@diak.OsztalyId" class="w3-button w3-white w3-text-blue w3-border w3-border-blue w3-hover-blue w3-round"><i class="fas fa-user"></i></a>
                             </td>
                         </tr>
                     }

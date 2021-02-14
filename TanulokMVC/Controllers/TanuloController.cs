@@ -15,14 +15,24 @@ namespace TanulokMVC.Controllers
         OsztalyzatDAO osztalyzatDAO = new OsztalyzatDAO();
 
         // ID alapján a tanuló lekérdezése adatbázisból
-        public IActionResult TanuloAdatok(int tanuloId)
+        public IActionResult TanuloAdatok(int tanuloId, int osztalyId)
         {
             // Tanuló lekérdezés
             TanuloModel tanulo = tanuloDAO.TanuloIdAlapjan(tanuloId);
 
-            // Tanulóhoz tartozó jegyek lekérdezése 
-            tanulo.osztalyzatok = osztalyzatDAO.TanuloOsztalyzatok(tanuloId);
-            return View(tanulo);
+            // Meg kell vizsgálni, hogy nem-e lett törölve időközben a tanuló az adatbázisból
+            if (tanulo is not null)
+            {
+                // Tanulóhoz tartozó jegyek lekérdezése 
+                tanulo.osztalyzatok = osztalyzatDAO.TanuloOsztalyzatok(tanuloId);
+                return View(tanulo);
+            }
+            // Ha törölve lett a tanuló, akkor visszairányítás az osztályba
+            else
+            {
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = osztalyId });
+            }
+
         }
 
         public IActionResult UjTanuloForm(int osztalyId)
@@ -38,16 +48,15 @@ namespace TanulokMVC.Controllers
         {
             try
             {
-
                 tanuloDAO.Ujtanulo(ujTanulo);
                 TempData["Uzenet"] = "hozzaadas_siker";
-                return RedirectToAction("OsztalyAdatok", "Osztaly", new { Id = ujTanulo.OsztalyId });
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = ujTanulo.OsztalyId });
             }
             catch (Exception)
             {
 
                 TempData["Uzenet"] = "hozzaadas_hiba";
-                return RedirectToAction("OsztalyAdatok", "Osztaly", new { Id = ujTanulo.OsztalyId });
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = ujTanulo.OsztalyId });
             }
 
         }
@@ -70,14 +79,14 @@ namespace TanulokMVC.Controllers
             {
                 TempData["Uzenet"] = "modositas_siker";
                 tanuloDAO.TanuloModositas(modositandoTanulo);
-                return RedirectToAction("OsztalyAdatok", "Osztaly", new { Id = modositandoTanulo.OsztalyId });
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = modositandoTanulo.OsztalyId });
 
             }
             catch (Exception)
             {
 
                 TempData["Uzenet"] = "modositas_hiba";
-                return RedirectToAction("OsztalyAdatok", "Osztaly", new { Id = modositandoTanulo.OsztalyId });
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = modositandoTanulo.OsztalyId });
             }
 
         }
@@ -89,14 +98,14 @@ namespace TanulokMVC.Controllers
             {
                 tanuloDAO.TanuloTorles(tanuloId);
                 TempData["Uzenet"] = "torles_siker";
-                return RedirectToAction("OsztalyAdatok", "Osztaly", new { Id = osztalyId });
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = osztalyId });
 
             }
             catch (Exception)
             {
 
                 TempData["Uzenet"] = "torles_hiba";
-                return RedirectToAction("OsztalyAdatok", "Osztaly", new { Id = osztalyId });
+                return RedirectToAction("OsztalyAdatok", "Osztaly", new { osztalyId = osztalyId });
             }
         }
     }

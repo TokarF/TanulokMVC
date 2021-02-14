@@ -37,10 +37,10 @@ namespace TanulokMVC.Controllers
 
         }
 
-        public IActionResult OsztalyAdatok(int id)
+        public IActionResult OsztalyAdatok(int osztalyId)
         {
-            OsztalyModel osztaly = osztalyDAO.OsztalyIdAlapjan(id);
-            osztaly.diakok = tanuloDAO.OsztalyTanulok(id);
+            OsztalyModel osztaly = osztalyDAO.OsztalyIdAlapjan(osztalyId);
+            osztaly.diakok = tanuloDAO.OsztalyTanulok(osztalyId);
             return View(osztaly);
         }
 

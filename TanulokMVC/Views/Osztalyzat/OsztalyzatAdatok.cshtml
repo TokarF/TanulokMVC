@@ -14,67 +14,74 @@
         <h3>Adatok</h3>
     </header>
     <div class="w3-row-padding">
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.OsztalyzatId)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.OsztalyzatId)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.OsztalyzatId)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.TanuloId)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.TanuloId)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.TanuloId)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.Tantargy)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.Tantargy)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.Tantargy)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.OsztalyzatTipus)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.OsztalyzatTipus)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.OsztalyzatTipus)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.Osztalyzat)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.Osztalyzat)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.Osztalyzat)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.Megnevezes)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.Megnevezes)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.Megnevezes)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.Megjegyzes)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.Megjegyzes)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.Megjegyzes)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p> @Html.DisplayNameFor(model => model.Sulyozott)</p>
+        <div class="w3-col s4 m4 l4">
+            <p> <b>@Html.DisplayNameFor(model => model.Sulyozott)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p id="sulyozott">@Html.DisplayFor(model => model.Sulyozott)</p>
         </div>
-        <div class="w3-col m4 l2">
-            <p>@Html.DisplayNameFor(model => model.Datum)</p>
+        <div class="w3-col s4 m4 l4">
+            <p><b>@Html.DisplayNameFor(model => model.Datum)</b></p>
         </div>
-        <div class="w3-col m8 l10">
+        <div class="w3-col s8 m8 l8">
             <p>@Html.DisplayFor(model => model.Datum)</p>
         </div>
     </div>
 </div>
 
-<div class="w3-container w3-center" style="margin-top:50px; margin-bottom:50px;" id="showcase">
-    <a asp-controller="Osztalyzat" asp-action="OsztalyzatModositasForm" asp-route-osztalyzatId="@Model.OsztalyzatId" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round"><i class="fas fa-edit w3-margin-right"></i>Módosítás</a>
-    <a onclick="document.getElementById('osztalyzat-torles-modal').style.display='block'" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round"><i class="fas fa-trash w3-margin-right"></i>Törlés</a>
-    <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-tanuloid="@Model.TanuloId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+<div class="w3-row-padding" style="margin-top:50px; margin-bottom:50px;">
+    <div class="w3-third">
+        <a asp-controller="Osztalyzat" asp-action="OsztalyzatModositasForm" asp-route-osztalyzatId="@Model.OsztalyzatId"  style="display:block" class="w3-button w3-white w3-text-orange w3-border w3-border-orange w3-hover-orange w3-round w3-margin-bottom"><i class="fas fa-edit w3-margin-right"></i>Módosítás</a>
+    </div>
+    <div class="w3-third">
+        <a onclick="document.getElementById('osztalyzat-torles-modal').style.display='block'" style="display:block" class="w3-button w3-white w3-text-red w3-border w3-border-red w3-hover-red w3-round l4 w3-margin-bottom"><i class="fas fa-trash w3-margin-right"></i>Törlés</a>
+
+    </div>
+    <div class="w3-third">
+        <a asp-controller="Tanulo" asp-action="TanuloAdatok" style="display:block" asp-route-tanuloId="@Model.TanuloId" class="w3-button w3-white w3-text-dark-gray w3-border w3-border-dark-gray w3-hover-dark-gray w3-round w3-margin-bottom"><i class="fas fa-sign-out-alt w3-margin-right"></i>Vissza</a>
+    </div>
 </div>
 
 @* Osztályzat törlés Modal *@
@@ -93,76 +100,7 @@
     </div>
 </div>
 
+@*  *@
 <script>
     let sulyozott = document.querySelector("#sulyozott").firstChild.classList.add("w3-check");
-
-
 </script>
-
-@*<h1>OsztalyzatAdatok</h1>
-
-    <div>
-        <h4>OsztalyzatModel</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.OsztalyzatId)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.OsztalyzatId)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TanuloId)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TanuloId)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Tantargy)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Tantargy)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.OsztalyzatTipus)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.OsztalyzatTipus)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Osztalyzat)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Osztalyzat)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Megnevezes)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Megnevezes)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Megjegyzes)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Megjegyzes)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Sulyozott)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Sulyozott)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Datum)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Datum)
-            </dd>
-        </dl>
-    </div>*@
-@*<div>
-        <a asp-controller="Osztalyzat" asp-action="OsztalyzatModositasForm" asp-route-osztalyzatId="@Model.OsztalyzatId">Módosítás</a>
-        <a asp-controller="Osztalyzat" asp-action="OsztalyzatTorles" asp-route-osztalyzatId="@Model.OsztalyzatId" asp-route-tanuloId="@Model.TanuloId">Törlés</a>
-        <a asp-controller="Tanulo" asp-action="TanuloAdatok" asp-route-id="@Model.TanuloId">Vissza</a>
-    </div>*@
