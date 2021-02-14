@@ -123,6 +123,7 @@
                             }
                         }
                     </td>
+
                     @* Átlag kiszámítása *@
                     @{List<OsztalyzatModel> osztalyzatok = Model.osztalyzatok.Where(osztalyzat => osztalyzat.Tantargy == tantargy).ToList();
                         double atlag = osztalyzatok.Count() > 0 ? osztalyzatok.Average(osztalyzat => osztalyzat.Osztalyzat) : 0;
@@ -130,7 +131,7 @@
                     <td>
                         @if (atlag != 0)
                         {
-                            <a style="pointer-events: none" class="w3-button @OsztalyzatSzin((int)Math.Floor(atlag)) w3-round">@Math.Round(atlag, 2)</a>
+                            <a style="pointer-events: none" class="w3-button @OsztalyzatSzin((int)Math.Floor(atlag)) w3-round">@Math.Round(atlag, 1)</a>
                         }
                     </td>
                 </tr>

@@ -28,8 +28,17 @@
             <span asp-validation-for="OsztalyzatTipus" class="w3-text-red"></span>
         </p>
         <p>
-            <label asp-for="Osztalyzat"></label>
-            <input asp-for="Osztalyzat" class="w3-input" type="number"/>
+            <label class="w3-margin-right" asp-for="Osztalyzat"></label>
+            <input asp-for="Osztalyzat" id="osztalyzat-input-1" class="radio-input-osztalyzat" type="radio" value="1" name="osztalyzat">
+            <label class="radio-label-osztalyzat w3-border w3-border-red w3-text-red w3-round" for="osztalyzat-input-1">1</label>
+            <input asp-for="Osztalyzat" id="osztalyzat-input-2" class="radio-input-osztalyzat" type="radio" value="2" name="osztalyzat">
+            <label class="radio-label-osztalyzat w3-border w3-border-orange w3-text-orange w3-round" for="osztalyzat-input-2">2</label>
+            <input asp-for="Osztalyzat" id="osztalyzat-input-3" class="radio-input-osztalyzat" type="radio" value="3" name="osztalyzat">
+            <label class="radio-label-osztalyzat w3-border w3-border-blue w3-text-blue w3-round" for="osztalyzat-input-3">3</label>
+            <input asp-for="Osztalyzat" id="osztalyzat-input-4" class="radio-input-osztalyzat" type="radio" value="4" name="osztalyzat">
+            <label class="radio-label-osztalyzat w3-border w3-border-green w3-text-green w3-round" for="osztalyzat-input-4">4</label>
+            <input asp-for="Osztalyzat" id="osztalyzat-input-5" class="radio-input-osztalyzat" type="radio" value="5" name="osztalyzat">
+            <label class="radio-label-osztalyzat w3-border w3-border-teal w3-text-teal w3-round" for="osztalyzat-input-5">5</label>
             <span asp-validation-for="Osztalyzat" class="w3-text-red"></span>
         </p>
         <p>

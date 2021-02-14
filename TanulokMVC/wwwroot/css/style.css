@@ -2,6 +2,45 @@ body,h1,h2,h3,h4,h5 {
         font-family: "Poppins", sans-serif
 }
 
+label {
+    font-weight: bold;
+}
+
 body {
     font-size: 16px;
+}
+
+.radio-input-osztalyzat {
+    display: none;
+}
+
+.radio-label-osztalyzat {
+    padding: 8px 16px;
+    background: #fff;
+    cursor: pointer;
+}
+
+#osztalyzat-input-1:checked + .radio-label-osztalyzat {
+    background: #f44336;
+    color: #fff !important;
+}
+
+#osztalyzat-input-2:checked + .radio-label-osztalyzat {
+    background: #ff9800;
+    color: #fff !important;
+}
+
+#osztalyzat-input-3:checked + .radio-label-osztalyzat {
+    background: #2196F3;
+    color: #fff !important;
+}
+
+#osztalyzat-input-4:checked + .radio-label-osztalyzat {
+    background: #4CAF50;
+    color: #fff !important;
+}
+
+#osztalyzat-input-5:checked + .radio-label-osztalyzat {
+    background: #009688;
+    color: #fff !important;
 }
