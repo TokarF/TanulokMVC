@@ -100,14 +100,14 @@ namespace TanulokMVC.Controllers
                     osztalyzatDAO.OsztalyzatModositas(modositandoOsztalyzat);
                     TempData["Uzenet"] = "osztalyzat_modositas_siker";
 
-                    return RedirectToAction("OsztalyzatAdatok", "Osztalyzat", new { id = modositandoOsztalyzat.OsztalyzatId });
+                    return RedirectToAction("OsztalyzatAdatok", "Osztalyzat", new { osztalyzatId = modositandoOsztalyzat.OsztalyzatId, tanuloId = modositandoOsztalyzat.TanuloId });
 
                 }
                 catch (Exception)
                 {
 
                     TempData["Uzenet"] = "osztalyzat_modositas_hiba";
-                    return RedirectToAction("OsztalyzatAdatok", "Osztalyzat", new { id = modositandoOsztalyzat.OsztalyzatId, });
+                    return RedirectToAction("OsztalyzatAdatok", "Osztalyzat", new { id = modositandoOsztalyzat.OsztalyzatId, tanuloId = modositandoOsztalyzat.TanuloId });
                 }
 
             }
